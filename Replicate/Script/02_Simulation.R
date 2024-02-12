@@ -13,6 +13,20 @@
 ### Data can be accessed by the file in the link above at path 
 ### ".../Data and code/osf-past-normality-regret-replication-exp2-data-v2.csv"
 
+## check whether package being installed or not
+check_and_install_packages <- function(package_names) {
+  for (package_name in package_names) {
+    if (!require(package_name, character.only = TRUE)) {
+      install.packages(package_name)
+      library(package_name, character.only = TRUE)
+    }
+  }
+}
+
+## if not, install package 
+packages_needed <- c("ggplot2", "dplyr", "knitr", "janitor", "tidyverse", "lubridate", "readr", "gridExtra", "ggstatsplot") # Replace with the packages you need
+check_and_install_packages(packages_needed)
+
 ### Work Setup ### 
 
 library(knitr)
