@@ -505,3 +505,5 @@ In conclusion, our exploration into action and inaction, inspired by Professor F
 In addition, there are several factors that can influence people's tendency to choose inaction rather than action. One of these is the choice is predisposed based on the subject's original motivations. To be more specific, when subjects make certain behavioral choices based on concern about avoiding losses, it can induce large differences from when they are more concentrated on maximizing the benefits and gains. This also corresponds to the psychological theory called Regulatory Focus Theory. The author also explains the different attitudes of human beings from the two motivational perspectives of prevention (avoiding losses) and promotion (maximizing interests).[@theory1]
 
 # References
+
+Lists: 
