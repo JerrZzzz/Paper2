@@ -5,7 +5,7 @@ abstract: "Fillon, A. A., Strauch, L., and Feldman, G. (2023) designed experimen
 format: pdf
 date: "today"
 date-format: "long"
-thanks: "Files, Codes and Paper are Availiable at https://github.com/JerrZzzz/The-Glamour-Of-Keeping-Inaction-In-Negative-Result.git. The original paper which we replicated is availiable at https://doi.org/10.1525/collabra.74817"
+thanks: "Files, Codes and Manuscript are Availiable at https://github.com/JerrZzzz/The-Glamour-Of-Keeping-Inaction-In-Negative-Result.git. The original study which we replicated is availiable at https://doi.org/10.1525/collabra.74817"
 author: Zhijun Zhong & Xincheng Zhang
 editor: visual
 toc: true
