@@ -1,0 +1,507 @@
+---
+title: "The Glamour Of Keeping Inaction In Negative Result: An Analysis of Potential Factors And Uncovering Reason."
+subtitle: "Reproduction of ‘Evaluations of action and inaction decision-makers in risky decisions resulting in negative outcomes: Inaction agents are preferred to and perceived as more competent and normative than action agents’(Fillon, A. A., Strauch, L., and Feldman, G, 2023)"
+abstract: "Fillon, A. A., Strauch, L., and Feldman, G. (2023) designed experiments based on the selection of two different financial agents and divided them into three prior outcome conditions to illustrate that when faced with choices involving risk-taking, people appear to prefer 'inaction' over 'action'. However, the original reports did not include the reasons behind this tendency even if they found that people were more satisfied with 'inaction' through various responses such as preference, regret, etc. We replicated two part of the original report to find that the results are consistent with the original study and generate reasonable predictions for the unmentioned reasons, then uncovering it by introducing an analysis of a similar situation in the Robbery scene. We discovered that the state of regret is one of the reasons that keep people choosing inaction within negative consequences, which guides people proactively deal with potential regret when making decisions."
+format: pdf
+date: "today"
+date-format: "long"
+thanks: "Files, Codes and Paper are Availiable at https://github.com/JerrZzzz/The-Glamour-Of-Keeping-Inaction-In-Negative-Result.git. The original paper which we replicated is availiable at https://doi.org/10.1525/collabra.74817"
+author: Zhijun Zhong & Xincheng Zhang
+editor: visual
+toc: true
+bibliography: ref.bib
+---
+
+```{r}
+#| message: false
+#| echo: false
+
+# Work Package set up
+library(knitr)
+library(janitor)
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(dplyr)
+library(readr)
+library(gridExtra)
+library(ggstatsplot)
+
+# read data
+study1 <- read.csv("/cloud/project/output/data/study1.csv")
+study2 <- read.csv("/cloud/project/output/data/study2.csv")
+rob <- read.csv("/cloud/project/output/data/robscene_study.csv")
+```
+
+# Introduction
+
+"Action" is defined in psychology as intentional doing something. On the contrary, "inaction" is defined as unintentional doing nothing in psychology.[@definition] The choice of action or inaction appears very frequently in people's communication and work. The choice of one action will represent the loss of the benefits brought by another action, and the benefits often represent the results. When we constrain the results to be negative, attitudes toward action versus inaction diverge and show a clear preference for inaction. For instance from authors, when faced with the same loss of money and other conditions, people will tend to hire a financial Advisor who did not transfer money to other investments rather than one who made changes. Almost everyone will take "choice question" about action or inaction, which is related to the proportion of profit and loss that a person gets. We want to use this report to study people's tendencies and related explanations for these two behavioral choices and then give people some auxiliary suggestions when making choices.
+
+We replicate the paper by Fillon, A. A., Strauch, L., and Feldman, G. (2023) with a focus on the following hypothesis:
+
+• Hypothesis 1a: Observers rate inaction agents more favorably than action agents in situations involving risky choices and resulting in a negative outcome.
+
+• Hypothesis 4: In case of no prior outcomes or positive prior outcomes, an inaction protagonist is preferred, seen as more competent, and perceived as more in line with social norms than a protagonist who acted.
+
+•Hypothesis 5: In case of negative prior outcomes, an action protagonist is preferred, seen as more competent, and perceived as more in line with social norms than a protagonist who did not act.
+
+It has been suggested that when subjects are informed of different prior conditions in advance, their choices of action or inaction will also be affected. A total of 1138 experimenters (including 355 males, 746 females, and 37 others), all participated in the experiment under three different prior conditions: no prior condition, positive prior condition, and negative prior condition. Subjects are more likely to praise or believe in those who do nothing than those who do. Although the test results of the negative prior condition showed reversed results, it did not affect the 'regret' factor in the given questions, which means that the results of the report are still the same.
+
+However, the above analyses do not mention sufficient evidence to explain the reasons for this selection tendency. We wanted to explore other possibilities of choice tendencies by considering similar situations. To fill this gap, we introduced @addedpaper and selected part 3 of it, which gave all participants a simulated scenario of entering a store that was different from usual but being robbed, and asked questions based on the two situations of self-driven reasons and external-driven reasons. We mainly selected the perspective of how much compensation the participants thought they need to receive if the above situation occurred and the degree of regret. We use plot sketching and observation to further determine the compatibility of the original report and look for explanations for people's tendency to inaction when faced with negative results. Through the original report @originalpaper and the supplementary report @addedpaper, we found that when people encounter negative results, they usually remain inactive instead of taking action. The reasons for this phenomenon is the intense regret after the negative things happen.
+
+The entire report is divided into 5 parts. In the Data part, we mentioned all the data sources used in the entire report analyzed the compatibility and reasons between the supplementary data and the original report. In the Result part, we divided into three parts and explained the experiments of Study 1, Study 2 in the original report, and the robbery scene through plots and text analysis. Then we discussed our findings and some expansion topics about our understanding of the world in the Discussion section. In the Conclusion section, we summarize our findings in the Results and Discussion sections and give readers some explanations about the tendency to make choices and inaction.
+
+All data manipulated and presented in this paper were sourced from the paper written by Professor Feldman et al [@originalpaper] and used Professor Feldman's another paper [@addedpaper] to produce a supportive graph in order to enhance our idea. The data processing, and analyzing for this replication is using R [@r] along with other support while very useful packges knitr[@knitr], janitor[@janitor], tidyverse[@tidyverse], lubridate[@lubridate], ggplot2[@ggplot2], dplyr[@dplyr], readr[@readr], gridExtra[@gridExtra], ggstatsplot[@ggstatsplot].
+
+# Data
+
+## Data Source And Methodology
+
+For the original report, We used the data from Study 1, and Study 2 that was provided in the replication package by Fillon, A. A., Strauch, L., and Feldman, G. (2023). The results of all survey data on the some questions are derived from responses from randomly recruited subjects. For Study 1, the data were created in 2018 and released in 2023. 339 participants (including 124 males, 208 females) each were included and provided with scale mode questions related to attitudes. The final table including the number of participants, mean age, and standard deviation age was drawn by summarizing descriptive statistics. On the other hand, for Study 2, the data was created in 2019 and released in 2023 as well. A total of 460 randomly recruited prolific participants(including 138 males, 308 females) were included and provided with three different prior conditions in advance: no prior control condition, positive prior outcomes, and negative prior outcomes. We believe that the subjects were given these three different conditions which is reasonable since when the prior condition is positive it can elicit inaction because most people will not lose the previously given positivity by changing it. On the contrary, when the prior condition is negative, it can effectively elicit action because most people will reverse the previously given negative feedback through certain changes. By comparing these two control groups and taking the placebo group (no prior control condition) into account, the reliability and completeness of Study 2 itself can be ensured. Then collect data and create charts like study1, which also contains data on the number of participants, mean age, and standard deviation age.
+
+In addition, we also introduced a similar situation[@addedpaper] to supplement the original report problem and further explore the explanations for why people are more inclined to do nothing when encountering negative results. The additional data introduced all come from the data provided by Kutschera and Feldman (2018) in the replication package. The main reason for comparing this situation to the problem in the original report is that the situational research conducted by Kutschera and Feldman is more inclined to explore the reasons behind people's choices and analyze the psychological state of "regret" as a main factor.
+
+Two reasons ensure the two situations are similar.The First point is that the interest elements used in the two situations are the same. To be more specific, the money that was decided by two financial advisors as actions or inactions is similar to the losses in a robbery at the stores. This led subjects to express attitudes toward the same substance category when faced with negative consequences Secondly, both experiments took into account the situation where negative prior conditions were given in advance, with a placebo group and control group to ensure the integrity of the two experiments. Based on the above two points, we can make an analogy between the two situations to consolidate the conclusion of the original article and try to find the correlation between the participants' decision of inaction and "regret" mental state.
+
+In Study 1 in the original report, we only selected 1b as the Study 1 we report in this article since 1a puts the questions that participants were asked in order. Under the case of the same questions in 1a and 1b, the disordering question in 1b is more persuasive than 1a. This is the reason why we only chose 1b as the dataset in Study 1.
+
+## Attributes
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-study1_desc
+#| tbl-cap: Study1
+
+study1_desc <- data.frame(
+  Column = c("preference", "competence", "normative", "regret"),
+  Description = c("The inclination to hire Paul or George in the future. ",
+                  "The perceived capability of Paul versus George",
+                  "Evaluates Paul or George aligns more closely with societal norms",
+                  "The perceived level of regret Paul or George has for their decisions"),
+  stringsAsFactors = FALSE # Avoid converting strings to factors
+)
+
+selected_study1 <- study1_desc %>%
+  head(5)
+
+kable(selected_study1, caption = "Study1 Variable Description", align = 'c')
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-study2_desc
+#| tbl-cap: Study2
+
+study2_desc <- data.frame(
+  Column = c( "preference", "regret", "condition"),
+  Description = c("The preference of who to hire in the future",
+                  "The extent to which either Paul or George is perceived to regret their decision",
+                  "Different prior conditions"),
+  stringsAsFactors = FALSE
+)
+
+selected_study2 <- study2_desc %>%
+  head(5)
+
+kable(selected_study2, caption = "Study2 Variable Description", align = 'c')
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-rob_desc
+#| tbl-cap: Study on Robbery Scene
+
+rob_desc <- data.frame(
+  Column = c("regret", "compensation", "condition"),
+  Description = c("Mr. Paul's perceived level of regret over his decision without any compensation.",
+                  "The compensation given to Mr. Paul for all the harm he got.", 
+                  "Different source of motivation"),
+  stringsAsFactors = FALSE
+)
+
+selected_rob <- rob_desc %>%
+  head(5)
+
+kable(selected_rob, caption = "Robbery Variable Description", align = 'c')
+```
+
+For the original report, study1 was selected to contain 4 different attitude variable categories: preference/competence/normative/regret, while we only selected two variable categories in study2: preference/regret, which is used to correspond to the Robbery scene. Each variable has a corresponding explanation in tables: @tbl-study1_desc for study 1, @tbl-study2_desc for study 2 and @tbl-rob_desc for the additional paper.
+
+The data of each variable in the original report is numeric type, expressing the degree of attitude of the participants towards scale mode issues related to attitudes. All dependent variables are in the interval \[-5, 5\] and represent the tendency towards inaction and action. Specifically, "-5" represents extreme inaction, and "5" represents extreme action. For example, participant A's choice of 5 in the "regret" question represents extreme regret for the choice of action. The column named "condition" represents the different prior conditions, "1" represents the subjects who were told that there were no prior conditions, "2" and "3" represent respectively being informed of positive and negative prior conditions in advance.
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-rob_scale_com
+#| tbl-cap: Robbery Scene Compensation Scale Meaning
+
+compensation_scale <- data.frame(
+  Scale = 1:11,
+  Compensation = c("$0", "$100,000", "$200,000", "$300,000", "$400,000", "$500,000", 
+                   "$600,000", "$700,000", "$800,000", "$900,000", "$1,000,000")
+)
+
+selected_scale1 <- compensation_scale %>%
+  head(11)
+
+kable(selected_scale1, caption = "Robbery Compensation Scale Description", align = 'c')
+
+```
+
+```{r}
+#| message: false
+#| echo: false
+#| label: tbl-rob_scale_reg
+#| tbl-cap: Robbery Scene Regret Scale Meaning
+
+regret_scale <- data.frame(
+  Scale = 0:4,
+  Regret = c("no regret", "weak regret", "medium regret", "strong regret", "very strong regret")
+)
+
+selected_scale2 <- regret_scale %>%
+  head(5)
+
+kable(selected_scale2, caption = "Robbery Regret Scale Description", align = 'c')
+```
+
+The entries for each variable in the supplementary report are also numeric types, We extracted two of the three research situations in part 3 of the original supplementary report: "Self-produced exception" led by oneself and "Other-produced exception" led by the environment or other factors besides own will. The two scale mode questions were created regarding the ideal amount of monetary compensation and the degree of regret in both situations. The compensation for subjects who believe they deserve is represented by "compensation" and the degree of regret for them is represented by "regret". All dependent variables in "compensation" are limited to [1, 11] to indicate the amount of money from low to high, which can be found in the meaning of each measurement in @tbl-rob_scale_com. All dependent variables in "regret" are limited to [0, 4] to represent the attitude from mild to resolute, which can be found in @tbl-rob_scale_reg.
+
+# Result
+
+In Study 1 and Study 2, all subjects were given a specific situation to test their tendencies toward action or inaction in two different situations. Participants were simulated in a scenario where they made a choice based on their own will, and the content of the choice was to choose financial Advisor A or B. For Financial Advisor A, in the past year, he considered whether to transfer all the money originally invested in Company D into shares in Company C, but he ultimately did not do so and ended up making £1.2 million less. For Financial Advisor B, also in the past year, he originally invested all his money in shares in Company C but he considered transferring the money to Company D and took actions that resulted in a loss of the same £1.2 million interest. Participants were asked to choose which of two different financial advisors they would like to hire for themselves.
+
+## Study 1: Randomized Questions Ordering
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| error: false
+#| label: fig-study1
+#| fig-cap: People’s Responce on Random Ordered Question
+
+study1_clean <- study1 %>%
+  filter(!is.na(preference), !is.na(competence), !is.na(normative), !is.na(regret))
+
+means <- study1_clean %>%
+  summarise(preference_mean = mean(preference, na.rm = TRUE),
+            competence_mean = mean(competence, na.rm = TRUE),
+            norms_mean = mean(normative, na.rm = TRUE),
+            regret_mean = mean(regret, na.rm = TRUE))
+
+calculate_proportion <- function(data, column) {
+  prop <- mean(data[[column]], na.rm = TRUE) / length(na.omit(data[[column]]))
+  return(prop)
+}
+
+# Creating the plots with vertical lines and proportions
+p1 <- ggplot(study1_clean, aes(x = preference)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means$preference_mean, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means$preference_mean), hjust = 1.1, vjust = 2) +
+  ggtitle("Preference")+
+  labs(y = "Count")+ 
+  scale_x_continuous(breaks = -5:5)
+
+p2 <- ggplot(study1_clean, aes(x = competence)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means$competence_mean, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means$competence_mean), hjust = 1.1, vjust = 2) +
+  ggtitle("Competence")+ 
+  labs(y = "Count")+ 
+  scale_x_continuous(breaks = -5:5)
+
+p3 <- ggplot(study1_clean, aes(x = normative)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means$norms_mean, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means$norms_mean), hjust = 1.1, vjust = 2) +
+  ggtitle("Norms")+
+  labs(y = "Count")+
+  scale_x_continuous(breaks = -5:5)
+
+p4 <- ggplot(study1_clean, aes(x = regret)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means$regret_mean, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means$regret_mean), hjust = 1.1, vjust = 2) +
+  ggtitle("Regret")+
+  labs(y = "Count")+scale_x_continuous(breaks = -5:5)
+
+# Combine the plots into one figure
+grid.arrange(p1, p2, p3, p4, ncol = 2, nrow = 2)
+
+```
+
+In Study 1, all participants chose from the four types of random order questions of preference, competency, normative, and regret under the above-given conditions according to their own wishes at the given scale of \[-5, 5\] represented in the x-axis. More specifically, the closer the scale is to -5 or the closer to 5 respectively means that the participant believes that financial advisor A or B is more consistent with the given description. The y-axis represents the number of participants obtained for each scale. By observing @fig-study1, the average values of these four types of problems can be found in the upper right corner and represented by the red line of each picture. For preference, competency, and normative, the mean values are all negative, which means that participants are more likely to choose financial advisor A and feel that financial advisor A is more capable than B and conforms to behavioral norms. On the contrary, for the regret part, the average value reaches 2.09, which has a distinctive and opposite trend to the other three cases. By observing the histogram features, participants had a strong regret attitude towards Financial Advisor B and chose "5" in the majority.
+
+## Study 2: Three Prior Conditions
+
+Compared with Study 1, study 2 added three different prior conditions for each participant in advance. In other words, participants were told in advance that financial advisors A and B would usually make profits or losses in the past and a comfort group was set up to try to find a correlation between the prior conditions and the final participants' choices.
+
+```{r}
+#| message: false
+#| echo: false
+#| error: false
+#| warning: false
+#| label: fig-study2
+#| fig-cap: People's Responce in study2 from 3 Conditions
+
+## No prior condition
+study2_clean <- study2 %>%
+  filter(!is.na(preference), !is.na(competence), !is.na(descriptive.norms), !is.na(Injunctive), !is.na(regret), !is.na (preference))
+
+### Normal condition ###
+normal <- study2_clean %>%
+  filter(condition == "1")
+
+means_normal <- normal %>%
+  summarise(preference_mean_normal = mean(preference, na.rm = TRUE),
+            competence_mean_normal = mean(competence, na.rm = TRUE),
+            des_norms_mean_normal = mean(descriptive.norms, na.rm = TRUE),
+            i_norms_mean_normal = mean(Injunctive, na.rm = TRUE),
+            regret_mean_normal = mean(regret, na.rm = TRUE), 
+           preference_mean_normal = mean(preference, na.rm = TRUE),
+            )
+
+# Creating the plots with vertical lines and proportions
+
+no_p5 <- ggplot(normal, aes(x = preference)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means_normal$preference_mean_normal, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means_normal$preference_mean_normal), hjust = 1.1, vjust = 2) +
+  ggtitle("Normal Condition Perference")+
+  labs(y = "Count")+ 
+  scale_x_continuous(breaks = -5:5)
+
+no_p6 <- ggplot(normal, aes(x = regret)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means_normal$regret_mean_normal, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means_normal$regret_mean_normal), hjust = 1.1, vjust = 2) +
+  ggtitle("Normal Condition Regret")+
+  labs(y = "Count")+ 
+  scale_x_continuous(breaks = -5:5)
+
+## Positive condition 
+Postive <- study2_clean %>%
+  filter(condition == "2")
+
+means_postive <- Postive %>%
+  summarise(preference_mean_postive = mean(preference, na.rm = TRUE),
+            competence_mean_postive = mean(competence, na.rm = TRUE),
+            des_norms_mean_postive = mean(descriptive.norms, na.rm = TRUE),
+            i_norms_mean_postive = mean(Injunctive, na.rm = TRUE),
+            regret_mean_postive = mean(regret, na.rm = TRUE), 
+           preference_mean_postive = mean(preference, na.rm = TRUE),
+  )
+
+# Creating the plots with vertical lines and proportions
+
+po_p5 <- ggplot(Postive, aes(x = preference)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means_postive$preference_mean_postive, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means_postive$preference_mean_postive), hjust = 1.1, vjust = 2) +
+  ggtitle("Postive Condition Perference")+
+  labs(y = "Count")+
+  scale_x_continuous(breaks = -5:5)
+
+po_p6 <- ggplot(Postive, aes(x = regret)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means_postive$regret_mean_postive, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means_postive$regret_mean_postive), hjust = 1.1, vjust = 2) +
+  ggtitle("Postive Condition Regret")+
+  labs(y = "Count")+
+  scale_x_continuous(breaks = -5:5)
+
+## Negative condition 
+negative <- study2_clean %>%
+  filter(condition == "3")
+
+means_negative <- negative %>%
+  summarise(preference_mean_negative = mean(preference, na.rm = TRUE),
+            competence_mean_negative = mean(competence, na.rm = TRUE),
+            des_norms_mean_negative = mean(descriptive.norms, na.rm = TRUE),
+            i_norms_mean_negative = mean(Injunctive, na.rm = TRUE),
+            regret_mean_negative = mean(regret, na.rm = TRUE), 
+           preference_mean_negative = mean(preference, na.rm = TRUE),
+  )
+
+# Creating the plots with vertical lines and proportions
+
+ne_p5 <- ggplot(negative, aes(x = preference)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means_negative$preference_mean_negative, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means_negative$preference_mean_negative), hjust = 1.1, vjust = 2) +
+  ggtitle("Negative Condition Preference")+
+  labs(y = "Count")+
+  scale_x_continuous(breaks = -5:5)
+
+ne_p6 <- ggplot(negative, aes(x = regret)) + 
+  geom_histogram(binwidth = 1) + 
+  geom_vline(xintercept = means_negative$regret_mean_negative, color = "red") +
+  annotate("text", x = Inf, y = Inf, label = sprintf("Mean: %.2f", means_negative$regret_mean_negative), hjust = 1.1, vjust = 2) +
+  ggtitle("Negative Condition Regret")+
+  labs(y = "Count")+
+  scale_x_continuous(breaks = -5:5)
+
+# Combine the plots into one figure
+grid.arrange(no_p5, no_p6, po_p5, po_p6, ne_p5, ne_p6, ncol = 2, nrow = 3)
+```
+
+By observing @fig-study2, the six graphs respectively represent the investigation results of the two variables "preference" and "regret" of the participants under no prior conditions, positive prior conditions, and negative prior conditions. For the no prior condition and the positive prior condition, participants' choice of financial advisor showed the same phenomenon as study1 in favoring financial advisor A, which can be judged by the average values represented by the red lines as -0.44 and -1.23. For the situation where negative prior conditions are given in advance, participants seem to be more inclined to hire financial advisor B to serve themselves because the average scale becomes positive and equal to 0.51. However, by observing "regret" in the three histogram distributions. Regardless of any prior conditions given to participants, they will have greater regret towards financial advisor B. The average values are all positive and are 2.04, 2.32, and 1.75 respectively.
+
+## Robbery Scene
+
+In this study, each participant was placed in a simulated situation. The amount of compensation and degree of regret the participant believed he/she should receive when he/she went shopping in another store due to self-motivated reasons (marked as personal) or due to external factors (marked as external) and was accidentally robbed.
+
+### Compensation Amount
+
+```{r}
+#| message: false
+#| echo: false
+#| warning: false
+#| error: false
+#| label: fig-robscene_com
+#| fig-cap: People's Compensation Altitudes on Robbery Scene
+
+study_filtered <- select(rob, Q_TotalDuration, sc3_c2_compensation, 
+                         sc3_c2_regret, sc3_c3_compensation, sc3_c3_regret, 
+                         age, Sc3condition)
+
+freq_sc3_c2 <- study_filtered %>%
+  count(sc3_c2_compensation) %>%
+  rename(Compensation_Amount = sc3_c2_compensation, Frequency = n)
+
+freq_sc3_c3 <- study_filtered %>%
+  count(sc3_c3_compensation) %>%
+  rename(Compensation_Amount = sc3_c3_compensation, Frequency = n)
+
+# Combine the two frequency tables and add a new column to differentiate them
+freq_combined <- bind_rows(
+  mutate(freq_sc3_c2, Compensation_Type = 'personal compensation'),
+  mutate(freq_sc3_c3, Compensation_Type = 'external compensation')
+)
+
+# Calculate means for each compensation type to add vertical lines
+mean_sc3_c2 <- mean(study_filtered$sc3_c2_compensation, na.rm = TRUE)
+mean_sc3_c3 <- mean(study_filtered$sc3_c3_compensation, na.rm = TRUE)
+
+freq_combined <- freq_combined %>%
+  arrange(Compensation_Type, Compensation_Amount)
+
+# Now plot the scatter plot with the lines connecting the points
+ggplot_object <- ggplot(freq_combined, aes(x = Compensation_Amount, y = Frequency, color = Compensation_Type, group = Compensation_Type)) +
+  geom_point(size = 2) +
+  geom_line() +  # This adds the lines connecting the points
+  geom_vline(xintercept = mean_sc3_c2, color = "deepskyblue", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = mean_sc3_c3, color = "hotpink", linetype = "dashed", size = 1) +
+  scale_y_continuous(limits = c(0, 40)) +
+  scale_color_manual(values = c('personal compensation' = 'deepskyblue', 'external compensation' = 'hotpink')) +
+  labs(title = "Frequency of Compensation Amounts",
+       x = "Compensation Amount",
+       y = "Frequency",
+       color = "Compensation Type") +
+  theme_minimal()
+
+ggplot_object
+
+```
+
+For scatter plot @fig-robscene_com, the x-axis shows the division of scale from \[1, 11\] and represents the amount of compensation that participants think they should receive when the given situation occurs. The y-axis shows the frequency of participants' choices for each individual scale. By observing @fig-robscene_com, we found that for the two cases, the trends are the same and have similar average values of 5.89 for personal factors and 6.01 for external factors.
+
+### Degree Of Regret
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+#| error: false
+#| label: fig-robscene_reg
+#| fig-cap: People's Regret Altitude on Robbery Scene 
+
+
+freq_sc3_c2_r <- study_filtered %>%
+  count(sc3_c2_regret) %>%
+  rename(regret_Amount = sc3_c2_regret, Frequency = n)
+
+# Tabulate the frequencies of each compensation value for sc3_c3
+freq_sc3_c3_r <- study_filtered %>%
+  count(sc3_c3_regret) %>%
+  rename(regret_Amount = sc3_c3_regret, Frequency = n)
+
+# Combine the two frequency tables and add a new column to differentiate them
+freq_combined_r <- bind_rows(
+  mutate(freq_sc3_c2_r, regret_Type = 'Personal regret'),
+  mutate(freq_sc3_c3_r, regret_Type = 'External regret')
+)
+
+# Calculate means for each compensation type to add vertical lines
+mean_sc3_c2_regret <- mean(study_filtered$sc3_c2_regret, na.rm = TRUE)
+mean_sc3_c3_regret <- mean(study_filtered$sc3_c3_regret, na.rm = TRUE)
+
+ggplot_object_r <- ggplot(freq_combined_r, aes(x = regret_Amount, y = Frequency, color = regret_Type, group = regret_Type)) +
+  geom_point(size = 2) +
+  geom_line() +  
+  geom_vline(xintercept = mean_sc3_c2_regret, color = "darkorange", linetype = "dashed", size = 1) +
+  geom_vline(xintercept = mean_sc3_c3_regret, color = "violetred", linetype = "dashed", size = 1) +
+  scale_y_continuous(limits = c(0, 90)) +
+  scale_color_manual(values = c('Personal regret' = 'darkorange', 'External regret' = 'violetred')) +
+  labs(title = "Frequency of Regret Amounts",
+       x = "Regret Amount",
+       y = "Frequency",
+       color = "Regret Type") +
+  theme_minimal()
+
+ggplot_object_r
+
+```
+
+For scatter plot @fig-robscene_reg, the x-axis shows the division of scale from \[0, 4\] and represents the degree of regret that participants think they will receive when the given situation occurs. The y-axis shows the frequency of participants' choices for each individual scale. By observing @fig-robscene_reg, we found that for the two cases, the trends are also the same and have similar average values of 3.69 for personal factors and 3.34 for external factors. In addition, actions driven by self-induced factors will lead to greater regret than actions driven by external factors. This is because more people choose the highest degree of regret in actions caused by self-factors.
+
+# Discussion
+
+When we studied the original report, we found that there was a certain imbalance in the male-female ratio of randomly recruited participants for Study 1 and Study 2. The problem of bias has the possibility of affecting the experimental results. But through[@manvswoman], We learned that there is no big difference between men and women in decision-making. This indicates that the results of the original report will not be affected by bias.
+
+## What have we done?
+
+The theme-driven throughout the report is our selection of Evaluations of action and inaction decision-makers in risky decisions resulting in negative outcomes (Fillon, A. A., Strauch, L., and Feldman, G, 2023). For this original article, we selected Study 1 and Study 2 and extracted the contents of the given data packets to try to replicate their findings on people's tendency to do nothing or act when faced with negative outcomes. We also searched for another report to use a similar situation to analyze and consolidate the understanding of people's tendencies and try to explain it. In the data section, we created several tables to represent the meaning of columns in all the data we used and the reasonable reasons for selecting the Robbery scene to ensure the efficiency and reliability of the report.
+
+Then we divided the result into three parts. In the first part, we extracted the random questions from Study 1 in the original report and re-simulated them based on the data at @fig-study1, because we believe that the results of random questions to participants are more meaningful and illustrative than sequential questions. Next, for Study 2, subjects were given three different prior conditions in advance. All participants were informed separately before being asked attitude-related questions: no prior condition, positive prior condition, and negative prior condition. Although we found that for the negative prior condition, participants had opposite opinions on preference to the other two cases, the tendency of the response in regret part did not change in @fig-study2. Thus, we conclude the same results as the original report and speculate that people's attitudes towards a choice of regret led them to "do nothing" in the negative results. We introduced the robbery scene, which is the last part of the result, to find the correlation between the tendency to inaction and regret. We found through @fig-robscene_reg that people will show a higher degree of regret when their own decisions lead to bad results. This also shows believable evidence that our conjecture based on the results of the original report is correct.
+
+Besides, @fig-robscene_com shows that people's decisions on financial damage, whether they make independent decisions or are affected by external factors, are very similar, with only a frequency difference of 0.12. This conclusion enhances the stability of Study 1 and Study 2 because the original report did not clearly indicate whether the experimenter answered the questions independently or was influenced by others other than themselves.
+
+## Do Prior Conditions Matter?
+
+By observing Study 2 in the original report, we explore the impact of different prior conditions on subjects' decisions when faced with negative outcomes. By observing @fig-study2, we found that when people were told a positive prior condition, the average value obtained by scale was -1.23, which means that more participants favored the choice of inaction. In contrast, when people were told the negative prior condition, the mean value of the scale was 0.51, indicating that participants changed their minds and were slightly more inclined to choose the action. This phenomenon can express the correlation between human choices and prior conditions in reality. Most people will not choose to change their status when given positive prior conditions because they are afraid of reducing or disappearing the originally given prior conditions through actions. On the other hand, people generally will not remain inactive when a given prior condition is known to be negative since they want to reverse the outcomes by doing something.
+
+This view is consistent with human nature and social structure. To be more specific, people's decision-making will be affected by prior conditions, which are derived from comprehensive statistics of historical behavior. This decides that people who have many successes have more possibilities to get a job than people who have too many failures, such as recruiting in a company society. The study by Van Hooft et al [@successmangoodjob] highlights the critical role of job search and behavior in achieving employment success, underscoring the importance of proactive engagement in the job search process. This research supports the idea that individuals with high success and quality when they seek a job, are more likely to secure employment. But anything that happens can affect the historical success and failure rates, and prior factors will have a very negative impact on some candidates who have relatively good ability but have a bad experiences. This gives us some different perspectives on the current society's evaluation of people.
+
+## Possible Explanation For Inaction
+
+We reached the same conclusion through the experiments on the original report reproduced in the first two parts of the result, which is that when people face negative results, they are more inclined to choose inaction regardless of the prior conditions. However, the original report did not clearly indicate the explanation of this phenomenon. However by observing @fig-study2, although the preference under the negative prior condition shows an opposite trend to the other two prior conditions, the regret part has not changed. This phenomenon makes us speculate that regret is a possibility that induces people's inaction. We introduced the Robbery scene and further confirmed the decisive influence of regret on people's tendency to inaction in @fig-robscene_reg. Subjects are simulated to change their daily living habits for going to different stores, which is a manifestation of action. Losses whether caused by personal guidance or external factors will induce a high degree of regret after actions. By observing the frequency point of @fig-robscene_reg, we found that in both cases, most people chose the scale "4", which represents extreme regret. Therefore, we believe that in the original report, people are more inclined to do nothing when faced with negative results because when people act, they will make themselves feel regret driven by two different reasons, so they prefer inaction.
+
+## What Have We Learned From The Experiments?
+
+In Professor Feldman's experiment, as illustrated in @fig-study1, participants tend to attribute greater regret to the financial advisor who took decisive action (B) rather than the one who remained passive (A). The experiment suggests that people often think that taking action leads to more regret, particularly when outcomes are negative. This observation matches well with everyday experiences where stepping away from our usual habits and facing bad outcomes often makes us wonder, "What if I hadn't made that choice?"
+
+Nevertheless, it is unrealistic to anticipate consistently making the 'correct' choices, as future outcomes are inherently unpredictable. The crucial element in enhancing the probability of making favorable decisions is not the avoidance of regret but rather the cultivation of courage. Excessive attention on potential regret can paralyze decision-making, and influence the ability to embrace change.
+
+The insights collected from these experiments underscore the importance of comprehensive consideration and the cultivation of an objective mindset prior to decision-making. By ensuring that our choices are well thought out and not overly influenced by the fear of regret, we can handle life's ups and downs with greater confidence and adaptability.
+
+## Stengths And Weaknesses
+
+In the paper of Professor Feldman, a detailed exploration of action versus inaction through experimental design is presented. However, one area that requires further exploration is the underlying reasons why individuals may behave with a tendency towards inaction. My replication study aims to fill this gap by investigating the motivations behind choosing inaction over action. The primary finding of my research suggests that the anticipation of regret significantly influences this decision-making process. Individuals often opt for inaction out of fear that taking action may lead to greater regret when the outcomes are unfavorable. This hypothesis is supported by additional research [@addedpaper] which verified the perspective that the avoidance of regret can be a convincing factor in the decision to avoid taking decisive steps. On the other hand, a praisable aspect of Feldman's study is the compatibility of its experimental design. As illustrated in our Figure see (@fig-robscene_com), the experiments demonstrate that the extent of regret experienced by individuals is consistent, irrespective of whether the decision was independently made or influenced by external factors. This finding suggests that the level of regret associated with either poor self-directed decisions or those swayed by external advice remains comparable. Consequently, this aspect of Feldman's research highlights the invariant nature of regret in the decision-making process, showcasing that the experimental outcomes are consistent regardless of the influence of external factors on the participants' choices.
+
+For our report, our shortcoming lies in the fact that all the data we used in Studies 1 and 2 were based on the original reported data package. We did not have the resources or opportunity to randomly recruit participants for statistics. Potential next steps are to improve the veracity and reliability of our reports by re-establishing the experiments by ourselves.
+
+# Conclusion
+
+In conclusion, our exploration into action and inaction, inspired by Professor Feldman's original research, has illustrated people's tendency to inaction when encounter negative results. Through comprehensive analysis and replication of the original paper, complemented by our investigation, we've uncovered that the fear of regret significantly sways individuals towards inaction. This discovery not only extends the report initiated by Feldman and etc. but also introduces new dimensions to understanding human behavior under risk. Our findings advocate for a balanced approach to decision-making, emphasizing the importance of courage and objective assessment in dealing with the challenges posed by potential regret. By enhancing their ability to make well-considered decisions and maintaining a resolute mindset, individuals can better handle the difficult decisions they face, leading to more effective personal development and adaptability in times of uncertainty.
+
+## Regulatory Focus Theory
+
+In addition, there are several factors that can influence people's tendency to choose inaction rather than action. One of these is the choice is predisposed based on the subject's original motivations. To be more specific, when subjects make certain behavioral choices based on concern about avoiding losses, it can induce large differences from when they are more concentrated on maximizing the benefits and gains. This also corresponds to the psychological theory called Regulatory Focus Theory. The author also explains the different attitudes of human beings from the two motivational perspectives of prevention (avoiding losses) and promotion (maximizing interests).[@theory1]
+
+# References
